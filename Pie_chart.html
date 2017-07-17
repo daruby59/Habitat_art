@@ -1,0 +1,88 @@
+<html>
+  <head> 
+    <title>Pie Chart</title>
+    <script src="Habitat_art_10_29_2015.js"></script>
+    <script type="text/javascript"> 
+    //
+    // date: 10-29-2015
+    //
+//
+function draw() {
+var canvas = document.getElementById('Smartart'); 
+                if (canvas.getContext){ 
+                  var gS2 = canvas.getContext('2d'); 
+                } 
+//
+// (1) coordinate(x_scale,y_scale,x_step,y_step,grid on,axis values on, axes on, system size);
+//
+	x_scale = 100.0;
+	y_scale = 100.0;
+	x_step = 5.0;
+	y_step = 5.0;
+	grid_flag = 0.0;
+	value_flag = 0.0;
+	axis_flag = 0.0;
+	cartesian_size = 300.0;
+    	coordinate(x_scale,y_scale,x_step,y_step,grid_flag,value_flag,axis_flag,cartesian_size);
+//
+// (2) axis_label(x axis label, y axis label, graph title)
+//
+    	x_label = "";
+    	y_label = "";
+	title = "Pie Chart";
+    	axis_label(x_label,y_label,title);
+//
+// (3) csLine(x1,y1,x2,y2,color,line weight);  
+// (4) csPoint(x1,y1,weight,color);
+// (5)  csLabel(x1,y1,text,color);
+// (6) csDropLine(x1,y1,weight,fill color,x_drop on, y_drop on);
+// (7) csRectangle(x1,y1,width,height,weight,border color, fill color)
+// (8) csTriangle(x1,y1,x2,y2,x3,y3,color,fill color)
+// (9) csPlotFunction(constant,linear,quadratic,cubed,inverse,start,end,color,line weight)
+// (10) csArrow(x1,y1,x2,y2,color,weight,tail on,head on)
+// (11) csCircle(x1,y1,radius,weight,color, fill color)
+// (12) csSlice(x1,y1,radius,start,arc,weight,color,fill_color)
+//
+csRectangle(0,100,100,100,1,"gray","white");
+// csSlice(10,70,20,0.0,2.0,2,"navy","silver");
+csSlice(54,48,20,0.0,0.3,1,"white","navy");
+csSlice(50,50,20,0.3,0.6,1,"white","red");
+csSlice(50,50,20,0.6,0.9,1,"white","magenta");
+csSlice(50,50,20,0.9,1.2,1,"white","orange");
+csSlice(50,50,20,1.2,1.5,1,"white","thunder");
+csSlice(50,50,20,1.5,2.0,1,"white","green");
+//
+// csSlice(54,48,20,0.0,0.3,1,"blue","navy");
+// csSlice(50,50,20,0.3,0.6,1,"maroon","red");
+// csSlice(50,50,20,0.6,0.9,1,"purple","magenta");
+// csSlice(50,50,20,0.9,1.2,1,"red","orange");
+// csSlice(50,50,20,1.2,1.5,1,"a2z","thunder");
+// csSlice(50,50,20,1.5,2.0,1,"pine","green");
+// csCircle(50,70,5,5,"white","white");
+csLabel(70,65,"25%","black");
+csLabel(35,70,"16%","black");
+csLabel(20,55,"16%","black");
+csLabel(30,30,"16%","black");
+csLabel(50,25,"17%","black");
+csLabel(75,35,"10%","black");
+//
+}
+</script> 
+ 
+<style type="text/css"> 
+    canvas { border: 0px solid black; } 
+</style>
+</head> 
+ 
+<body onload="draw();">
+<table border = "0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+         <canvas id="Smartart" width="400" height="400" bgcolor="white">
+           No support for the HTML5 object!
+        </canvas> 
+    </td>
+</tr>
+</table>
+</body>
+</html>

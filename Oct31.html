@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>market<⁄title>
+<script src="Habitat_art_12_18_2015.js"><⁄script>
+<script type="text⁄javascript">
+function draw() {
+var canvas = document.getElementById('Smartart'); 
+if (canvas.getContext){ 
+var gS2 = canvas.getContext('2d'); 
+} 
+coordinate(100,20,10,1,1,1,1,1,1,1,360);
+axis_label("q","p","market");
+csLine(20,16,80,4,4,"navy");
+csRectangle(10,10,40,2,1,"maroon","maroon");
+csDropLine(50,10,1,"gray",1,1);
+csPoint(50,10,1,"gray");
+csCircle(50,10,2,1,"pine","pine");
+}
+<⁄script >
+<style type="text/css" >
+canvas { border: 0px solid black; } 
+<⁄style>
+<⁄head >
+<body onload="draw();">
+<table border = "0" cellspacing="0" cellpadding="0">
+<tr>
+<td>
+<canvas id="Smartart" width="400" height="400" bgcolor="white">
+No support for the HTML5 object!
+<⁄canvas>
+<⁄td>
+<⁄tr>
+<⁄table>
+<⁄body>
+<⁄html>

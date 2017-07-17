@@ -1,0 +1,963 @@
+<html>  
+  <head>  
+    <title>Graph Kit (2015)</title>
+    <script type="text/javascript">  
+// 
+// Initialize variables
+//
+var x_scale = 100.0;
+var y_scale = 100.0;
+var x_step = 10.0;
+var y_step = 10.0;
+var x_grid_flag = 1.0;
+var x_value_flag = 1.0;
+var x_axis_flag = 1.0;
+var y_grid_flag = 1.0;
+var y_value_flag = 1.0;
+var y_axis_flag = 1.0;
+var cartesian_size = 300.0;
+//
+var x_label = "X-axis";
+var y_label = "Y-axis";
+var title = "Template";
+var ex = 0;
+var ey = 0;
+var idx = 0;
+var cl = "";
+var item = "";
+var wt = 1;
+var res = [0,0,0,0,0,0,0,0,0,0,0,0];
+var count = 0;
+var cl_temp = "black";
+var wt_temp = 1;
+var instruction = "";
+//
+var zero = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var one = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var two = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var three = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var four = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var five = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var six = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var seven = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var eight = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//
+var wta = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var objecta = ["line","line","line","line","line","line","line","line","line","line","line","line"];
+var cla = [0,0,0,0,0,0,0,0,0,00,0,0,0,0,0,0,0,0,0];
+//
+var instruct = [
+"Line(x1,y1,x2,y2,line-weight)",
+"Rectangle(x1,y1,x2,y2,line-weight)", 
+"DropLine(x1,y1,line-weight,x_drop,y_drop)",
+"Triangle(x1,y1,x2,y2,x3,y3,line-weight)",
+"Function(constant,linear,squared,cubed,inverse,start,end,line-weight)",
+"Arrow(x1,y1,x2,y2,line-weight,start_flag,end_flag)",
+"Label(x1,y1,txt)",
+"Circle(x1,y1,rad,line-weight)",
+"Slice(x1,y1,rad,start,arc,line-weight)","",""];
+//
+var constant = 0;
+var linear = 0;
+var squared = 0;
+var cubed = 0;
+var inverse = 0;
+var start = 0;
+var end = 0;
+//
+// popup window -- this generates the HTML code to be copied and pasted into a text editor and saved as an *.html file
+//
+function window1() {
+   j1window = window.open('', 'ax', 'height=400, width=500, toolbar=no, scrollbars=no');
+  //
+  // new code here
+  //
+  j1window.document.write("\&lt;"+"html"+"\&gt;"+"<br/>");
+
+  j1window.document.write("\&lt;"+"head"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"title"+"\&gt;"+title+"\&lt;"+"\&frasl;"+"title"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"script src=\"Habitat_art_12_18_2015.js\""+"\&gt;"+"\&lt;"+"\&frasl;"+"script"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"script type=\"text"+"\&frasl;"+"javascript\""+"\&gt;"+"<br/>");
+  // j1window.document.write("\&frasl;"+"\&frasl;"+"<br/>");
+  // j1window.document.write("\&frasl;"+"\&frasl;"+" date: 12-14-2015"+"<br/>");
+  // j1window.document.write("\&frasl;"+"\&frasl;"+"<br/>");
+  j1window.document.write("function draw() {"+"<br/>");
+  j1window.document.write("var canvas = document.getElementById(\'Smartart\'); "+"<br/>");
+  j1window.document.write("if (canvas.getContext){ "+"<br/>");
+  j1window.document.write("var gS2 = canvas.getContext(\'2d\'); "+"<br/>");
+  j1window.document.write("} "+"<br/>");
+  j1window.document.write("coordinate("+x_scale+","+y_scale+","+x_step+","+y_step+","+x_grid_flag+","+y_grid_flag+","+x_axis_flag+","+y_axis_flag+","+x_value_flag+","+y_value_flag+","+cartesian_size+");"+"<br/>");
+  j1window.document.write("axis_label(\""+x_label+"\",\""+y_label+"\",\""+title+"\");"+"<br/>");
+//
+  for (k=1;k<count+1;k++) {
+ 	   if (objecta[k] == "Line") {
+	      j1window.document.write("csLine("+zero[k]+","+one[k]+","+two[k]+","+three[k]+","+wta[k]+",\""+cla[k]+"\");"+"<br/>");
+	   }
+	   if (objecta[k] == "DropLine") {
+	     j1window.document.write("csDropLine("+zero[k]+","+one[k]+","+wta[k]+ ",\""+cla[k]+"\"," +two[k]+","+three[k]+");"+"<br/>");
+	     j1window.document.write("csPoint("+zero[k]+","+one[k]+","+wta[k]+",\""+cla[k]+"\");"+"<br/>");
+	  }
+	  if(objecta[k] == "Label") {
+	    j1window.document.write("csLabel("+zero[k]+","+one[k]+",\""+two[k]+"\","+wta[k]+",\""+cla[k]+"\");"+"<br/>");
+	  }
+	   if(objecta[k] == "Circle") {
+	     j1window.document.write("csCircle("+zero[k]*1.0+","+one[k]*1.0+","+two[k]*1.0+","+wta[k]+",\""+cla[k]+"\",\""+cla[k]+"\");"+"<br/>");
+	  }
+	  if(objecta[k] == "Slice") {
+	    j1window.document.write("csSlice("+zero[k]*1.0+","+one[k]*1.0+","+two[k]*1.0+","+three[k]*1.0+","+four[k]*1.0+","+wta[k]*1.0+",\""+cla[k]+"\",\""+cla[k]+"\");"+"<br/>");
+	  }
+	  if(objecta[k] == "Rectangle") {
+	    j1window.document.write("csRectangle("+zero[k]*1.0+","+one[k]*1.0+","+two[k]*1.0+","+three[k]*1.0+","+wta[k]+",\""+cla[k]+"\",\""+cla[k]+"\");"+"<br/>");
+	  }
+	  if(objecta[k] == "Triangle") {
+	    j1window.document.write("csTriangle("+zero[k]*1.0+","+one[k]*1.0+","+two[k]*1.0+","+three[k]*1.0+","+four[k]*1.0+","+five[k]*1.0+","+wta[k]*1.0+",\""+cla[k]+"\",\""+cla[k]+"\");"+"<br/>");
+	  }
+	  if(objecta[k] == "Arrow") {
+	    j1window.document.write("csArrow("+zero[k]*1.0+","+one[k]*1.0+","+two[k]*1.0+","+three[k]*1.0+","+wta[k]*1.0+",\""+cla[k]+"\","+four[k]*1.0+","+five[k]*1.0+");"+"<br/>");
+	  }
+	  if(objecta[k] == "Curve") {
+	    j1window.document.write("csPlotFunction("+zero[k]*1.0+","+one[k]*1.0+","+two[k]*1.0+","+three[k]*1.0+","+four[k]*1.0+",\""+cla[k]+"\","+five[k]*1.0+","+six[k]*1.0+","+wta[k]+",\""+cla[k]+"\");"+"<br/>");
+	  }
+    }	
+  j1window.document.write("}"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"script "+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"style type=\"text/css\" "+"\&gt;"+"<br/>");
+  j1window.document.write("canvas { border: 0px solid black; } "+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"style"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"head "+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"body onload=\"draw();\""+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"table border = \"0\" cellspacing=\"0\" cellpadding=\"0\""+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"tr"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"td"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"canvas id=\"Smartart\" width=\"400\" height=\"400\" bgcolor=\"white\""+"\&gt;"+"<br/>");
+  j1window.document.write("No support for the HTML5 object!"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"canvas"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"td"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"tr"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"table"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"body"+"\&gt;"+"<br/>");
+  j1window.document.write("\&lt;"+"\&frasl;"+"html"+"\&gt;"+"<br/>");
+//
+}
+//
+// mouse movement -- not used 
+//
+var index = 0;
+  function mov(e) {
+   ex = e.clientX;
+   ey = e.clientY;
+   index = Math.round(ey/30)-2;
+   cl = sb_code[index];
+   draw();
+}
+//
+// undo or image reverse countdown
+//
+function undo() {
+  if (count > 1) {
+    count = count -1;
+    draw();
+  }
+}
+//
+// reset the application -- some problem here
+//
+function reset() {
+  for (i=0;i<20;i++) {
+    one[i] = 0;
+    two[i] = 0;
+    three[i] = 0;
+    four[i] = 0;
+    five[i] = 0;
+    six[i] = 0;
+    seven[i] = 0;
+    eight[i] = 0;
+    wta[i] = 0;
+    cla[i] = 0;
+    objecta[i] = 0;
+  }
+  count = 0;
+  draw();
+}
+//
+// popup wizard gathering the parameters of an object to be drawn
+//
+function xpop(temi) {
+//
+  j2window = window.open('','', 'height=160, width=500, toolbar=no, status=no, scrollbars=no, location=no, menubar=no');
+  j2window.document.write("<html><head><title>"+temi+" Object</title></head>");
+  j2window.document.write("<body leftmargin=\"5\" topmargin=\"0\" bgcolor=\"#efefef\">");
+  j2window.document.write("<form name = \"fin\">");
+  j2window.document.write("<span style=\"font-family: arial, helvetica, sans-serif; color: #000000; font-size: small; display: block; padding-top: 5px; width:470px; height: 25px; text-align: center; border-bottom: solid thin navy;\"><b>Add a "+temi+"</b></span>");
+  j2window.document.write("<span style = \"font-weight: bold; font-family: arial; font-size: small; padding:5px; border-bottom: solid thin navy;\"> ");
+  if (temi == "Line") {
+    j2window.document.write("End points (x1, y1, x2, y2): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" onfocus = \"if(this.value !=\'') this.value=\'';\"/></span>"); 
+  }
+   if (temi == "Arrow") {
+    j2window.document.write("End points (x1, y1, x2, y2, tail = 1, head = 1): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+    if (temi == "Rectangle") {
+    j2window.document.write("Location (x1, y1, width, height): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+    if (temi == "Triangle") {
+    j2window.document.write("Vertices (x1, y1, x2, y2, x3, y3): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+  if (temi == "DropLine") {
+    j2window.document.write("Coordinates (x1, y1, x-drop = 1, ydrop = 1): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+   if (temi == "Circle") {
+    j2window.document.write("Center (x1, y1, radius): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+    if (temi == "Label") {
+    j2window.document.write("Location (x1, y1, text): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+  if (temi == "Curve") {
+    j2window.document.write("(constant, linear,squared,cubed,inverse,start,end): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }
+  if (temi == "Slice") {
+    j2window.document.write("Center (x1, y1, radius, start angle,degrees): <input type = \"text\" name = \"aone\" value = \"\" style = \"width: 100px; height: 20px;\" /></span>"); 
+  }	
+//
+   j2window.document.write("<span style = \"font-weight: bold; font-family: arial; font-size: small; padding:5px; border-bottom: solid thin navy;\"> ");
+if(temi== "Label") {
+   j2window.document.write(" Font (14 / 12 / 10px ): <input type = \"text\" name = \"weight\" value = \"\" style = \"width: 20px; height: 20px;\" /></span><br/><br/>"); 
+}
+if (temi != "Label") {
+   j2window.document.write(" weight: <input type = \"text\" name = \"weight\" value = \"\" style = \"width: 20px; height: 20px;\" /></span><br/><br/>"); 
+}
+   j2window.document.write("<span style = \"font-weight: bold; font-family: arial; font-size: small; padding:5px;\">color:</span><br/> ");
+//
+// color picker
+//
+  j2window.document.write("<div style = \"display: inline-block; \">");    
+  j2window.document.write("<div class = \"yy\" id=\"red\" style = \"background-color: #ff0000; width: 15px; height: 15px;\" onclick=\"opener.cly(0);\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"maroon\" style = \"background-color: #990000; width: 15px; height: 15px;\" onclick=\"opener.cly(1);\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"magenta\" style = \"background-color: #ff00ff; width: 15px; height: 15px;\" onclick=\"opener.cly(2);\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"purple\" style = \"background-color: #990099; width: 15px; height: 15px;\" onclick=\"opener.cly(3)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"green\" style = \"background-color: #00ff00; width: 15px; height: 15px;\" onclick=\"opener.cly(4)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"pine\" style = \"background-color: #009900; width: 15px; height: 15px;\" onclick=\"opener.cly(5)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"blue\" style = \"background-color: #0000ff; width: 15px; height: 15px;\" onclick=\"opener.cly(7)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"navy\" style = \"background-color: #000099; width: 15px; height: 15px;\" onclick=\"opener.cly(8)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"aqua\" style = \"background-color: #00ffff; width: 15px; height: 15px;\" onclick=\"opener.cly(9)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"teal\" style = \"background-color: #009999; width: 15px; height: 15px;\" onclick=\"opener.cly(6)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"thunder\" style = \"background-color: #0098ff; width: 15px; height: 15px;\" onclick=\"opener.cly(10)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"a2z\" style = \"background-color: #6496db; width: 15px; height: 15px;\" onclick=\"opener.cly(11)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"orange\" style = \"background-color: #ff6600; width: 15px; height: 15px;\" onclick=\"opener.cly(12)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"yellow\" style = \"background-color: #ffff00; width: 15px; height: 15px;\" onclick=\"opener.cly(17)\">&#160;</div>");
+   j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"silver\" style = \"background-color: #dedede; width: 15px; height: 15px;\" onclick=\"opener.cly(13)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"gray\" style = \"background-color: #c0c0c0; width: 15px; height: 15px;\" onclick=\"opener.cly(14)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<div style = \"display: inline-block; \">");  
+  j2window.document.write("<div class = \"yy\" id=\"white\" style = \"background-color: #ffffff; width: 13px; height: 14px; border: solid thin #000000; \" onclick=\"opener.cly(16)\">&#160;</div>");
+  j2window.document.write("<div class = \"yy\" id=\"black\" style = \"background-color: #000000; width: 15px; height: 15px;\" onclick=\"opener.cly(15)\">&#160;</div>");
+  j2window.document.write("</div> "); 
+  j2window.document.write("<center><input type = \"submit\" value=\"Add item\" onclick=\"opener.doSomething(fin.aone.value,fin.weight.value); \"/></center>");
+  //
+  j2window.document.write("</form>");
+  j2window.document.write("</body></html>");
+}
+//
+function cly(yy) {
+  cl_temp=sb_code[yy];
+  draw();
+}
+//
+function clz(zz) {
+  item = sb_object[zz];
+  instruction = instruct[zz];
+  xpop(item);
+  draw();
+}
+//
+// object choices
+//
+var sb_object = ["Line","Rectangle","DropLine","Triangle","Curve","Arrow","Label","Circle","Slice",""];
+//	
+// color choices
+//
+var sb_code = ["red","maroon","magenta","purple","green","pine","teal","blue","navy","aqua","thunder","a2z","orange","silver","gray","black","white","yellow"];
+var rr_code = [255,128,255,102,000,000,000,000,000,000,000,100,255,240,192,000,255,255,0,0];
+var gg_code = [000,000,000,102,255,128,128,000,000,255,153,150,102,240,192,000,255,255,0,0];
+var bb_code = [000,000,255,255,000,000,128,255,128,255,255,219,000,240,192,000,255,0,0,0];
+//
+function select_color(cl) {
+  // default black
+  rr = 0;
+  gg = 0;
+  bb = 0;
+  //
+  color_flag = -1;
+  for (i=0;i<18;i++) {
+     if(cl == sb_code[i]) {
+       rr = rr_code[i];
+       gg = gg_code[i];
+       bb = bb_code[i];
+       color_flag=1;
+     }
+  }
+}
+//
+// add a new graphical object -- from image buttons
+//
+function doSomething(xobj,wt2) {
+  count = count + 1;
+  if (count > 19) {
+     count = 19;
+  }
+  res = xobj.split(",");
+  //
+  zero[count] = res[0];
+  one[count] = res[1];
+  two[count] = res[2];
+  three[count] = res[3];
+  four[count] = res[4];
+  five[count] = res[5];
+  six[count] = res[6];
+  seven[count] = res[7];
+  eight[count] = res[8];
+  wta[count] = wt2;
+  cla[count] = cl_temp;
+  objecta[count] = item;
+  //
+  j2window.close();
+  draw(xobj);
+}
+//
+// coordinate system rectangle
+//
+function csRectangle(x1,y1,x2,y2,wt,cl,cl2) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl2);
+	if (color_flag < 0) {
+	  color_error();
+	}
+                gS2.fillStyle = "rgba("+rr+","+gg+","+bb+",0.5)";
+                gS2.beginPath();
+                gS2.moveTo(40+x1*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+(x1+x2)*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+(x1+x2)*x_pos,cartesian_size+40-(y1-y2)*y_pos);
+                gS2.lineTo(40+x1*x_pos,cartesian_size+40-(y1-y2)*y_pos);
+                gS2.closePath();
+                gS2.fill();  
+                select_color(cl);
+                gS2.lineWidth=wt;
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.beginPath();
+                gS2.moveTo(40+x1*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+(x1+x2)*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+(x1+x2)*x_pos,cartesian_size+40-(y1-y2)*y_pos);
+                gS2.lineTo(40+x1*x_pos,cartesian_size+40-(y1-y2)*y_pos);
+                gS2.closePath();
+                gS2.stroke();    
+}       
+//
+// triangle
+//
+function csTriangle(x1,y1,x2,y2,x3,y3,wt,cl,cl2) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl2);
+                gS2.fillStyle = "rgba("+rr+","+gg+","+bb+",0.5)";
+                gS2.beginPath();
+                gS2.moveTo(40+x1*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+x2*x_pos,cartesian_size+40-y2*y_pos);
+                gS2.lineTo(40+x3*x_pos,cartesian_size+40-y3*y_pos);
+                gS2.closePath();
+                gS2.fill();
+                //
+                select_color(cl);
+                gS2.lineWidth=wt;
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.beginPath();
+                gS2.moveTo(40+x1*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+x2*x_pos,cartesian_size+40-y2*y_pos);
+                gS2.lineTo(40+x3*x_pos,cartesian_size+40-y3*y_pos);
+                gS2.closePath();
+                gS2.stroke();
+               }
+//
+// draw a coordinate system line
+//
+function csLine(x1,y1,x2,y2,wt,cl) {
+var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl);
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.lineWidth=wt;
+                gS2.beginPath();
+                gS2.moveTo(40+x1*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.lineTo(40+x2*x_pos,cartesian_size+40-y2*y_pos);
+                gS2.closePath;
+                gS2.stroke();
+}
+//
+// dashed dropline
+//
+function csDropLine(x1,y1,wt,cl,x_drop,y_drop) { 
+               var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl);
+                gS2.lineWidth=wt;
+                if (y_drop == 1) {
+                  gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                  gS2.beginPath();
+                  gS2.moveTo(40,cartesian_size+40-y1*(y_pos));
+                  gS2.lineTo(40+x1*(x_pos),cartesian_size+40-y1*(y_pos));
+                  gS2.closePath;
+                  gS2.stroke();
+                  //
+                  gS2.fillStyle = "rgb(255,255,255)";
+                  for (i=40;i<40+x1*(x_pos);i=i+5) {
+                     gS2.fillRect(i,cartesian_size+39-y1*(y_pos),1,3);
+                  }
+                }
+                //
+                if (x_drop == 1) {
+                  gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                  gS2.beginPath();
+                  gS2.moveTo(40+x1*(x_pos),cartesian_size+40-y1*(y_pos));
+                  gS2.lineTo(40+x1*(x_pos),cartesian_size+40);
+                  gS2.closePath;
+                  gS2.stroke();
+                  //
+                  gS2.fillStyle = "rgb(255,255,255)";
+                  // for (i=280-y1*(y_pos); i<cartesian_size+40;i=i+5) {
+	for (i=cartesian_size+40-y1*(y_pos); i<cartesian_size+40;i=i+5) {
+                     gS2.fillRect(39+x1*(x_pos),i,3,1);
+                  }
+                }
+}
+//
+// plot a point
+//
+function csPoint(x1,y1,wt,cl) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl);
+                gS2.fillStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.fillRect(40-(wt/2)+x1*x_pos,cartesian_size+40-(wt/2)-y1*y_pos,wt,wt);
+}
+//
+// arrows
+//
+function csArrow(x1,y1,x2,y2,wt,cl,start_flag,end_flag) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl);
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.lineWidth=wt;
+                gS2.beginPath();
+                gS2.moveTo(40+x1*(x_pos),cartesian_size+40-y1*(y_pos));
+                gS2.lineTo(40+x2*(x_pos),cartesian_size+40-y2*(y_pos));
+                gS2.closePath;
+                gS2.stroke();
+	//
+                if (start_flag == 1) {
+                  var x1a = 40+x1*(x_pos);
+                  var y1a = cartesian_size+40-y1*(y_pos);
+                  var radx = 10.0;
+                  gS2.lineWidth=1;
+                  gS2.beginPath();
+                  var degree = Math.atan2((y2-y1),(x1-x2));
+                  ay=radx*Math.sin(degree-(Math.PI/6.0));
+                  ax=radx*Math.cos(degree-(Math.PI/6.0));
+                  gS2.moveTo(x1a-ax,y1a-ay);
+                  gS2.lineTo(x1a,y1a);
+                  ay=radx*Math.sin(degree+(Math.PI/6.0));
+                  ax=radx*Math.cos(degree+(Math.PI/6.0));
+                  gS2.lineTo(x1a-ax,y1a-ay);
+                  gS2.closePath;
+                  gS2.stroke();
+                }
+                //
+                if (end_flag == 1) {
+                  var x2a = 40+x2*(x_pos);
+                  var y2a = cartesian_size+40-y2*(y_pos);
+                  var radx = 10.0;
+                  gS2.lineWidth=1;
+                  gS2.beginPath();
+                  var degree = Math.atan2((y2-y1),(x1-x2));
+                  ay=radx*Math.sin(degree-(Math.PI/6.0));
+                  ax=radx*Math.cos(degree-(Math.PI/6.0));
+                  gS2.moveTo(x2a+ax,y2a+ay);
+                  gS2.lineTo(x2a,y2a);
+                  ay=radx*Math.sin(degree+(Math.PI/6.0));
+                  ax=radx*Math.cos(degree+(Math.PI/6.0));
+                  gS2.lineTo(x2a+ax,y2a+ay);
+                  gS2.closePath;
+                  gS2.stroke();
+                }
+}
+//
+// text label
+//
+function csLabel(x1,y1,txt,wt,cl) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl);
+                if (wt < 8) {
+	wt = 8;
+                }
+                if (wt > 18) {
+                    wt = 18;
+                }
+                gS2.font = ""+wt+"px Arial";
+                gS2.fillStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.fillText(txt,40+x1*x_pos,cartesian_size+40-y1*y_pos);
+}
+//
+// csPlotFunction(constant,linear,quadratic,cubed,inverse,start,end,wt,cl)
+//
+function csPlotFunction(constant,linear,squared,cubed,inverse,start,end,wt,cl) { 
+	var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+	select_color(cl);
+                 gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.lineWidth=wt;
+                gS2.beginPath();        
+                var  k2 = start+0.01;
+                var y_plot = constant + linear*k2 + squared*Math.pow(k2,2) + cubed*Math.pow(k2,3) + inverse/k2;
+                gS2.moveTo(40+start*(x_pos),cartesian_size+40-y_plot*(y_pos));
+                for (k2=start;k2<=end;k2=k2+1){
+                  y_plot = constant + linear*k2 + squared*Math.pow(k2,2) + cubed*Math.pow(k2,3) + inverse/k2;
+                  gS2.lineTo(40+k2*(x_pos),cartesian_size+40-y_plot*(y_pos));
+                }
+                gS2.closePath;
+                gS2.stroke();
+}
+//
+// circle csCircle(x1,y1,rad,wt,cl,cl2)
+//
+function csCircle(x1,y1,rad,wt,cl,cl2) {
+               var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl2);
+	if (cl2 == "white") {
+	   gS2.fillStyle = "rgb("+rr+","+gg+","+bb+")";
+	}
+	else {
+                  gS2.fillStyle = "rgba("+rr+","+gg+","+bb+",0.5)";
+	}
+                gS2.beginPath();
+                gS2.lineWidth=wt;
+                gS2.arc(40+x1*x_pos,cartesian_size+40-y1*y_pos,rad*x_pos,0,2.0*Math.PI);
+                gS2.closePath;
+                gS2.fill();
+                //
+                select_color(cl);
+                gS2.lineWidth=wt;
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.beginPath();
+                gS2.arc(40+x1*x_pos,cartesian_size+40-y1*y_pos,rad*x_pos,0,2.0*Math.PI);
+                gS2.closePath;
+                gS2.stroke();
+}
+//
+// pie slice
+//
+function csSlice(x1,y1,rad,begin,cra,wt,cl,cl2) {
+               var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl2);
+                gS2.fillStyle = "rgba("+rr+","+gg+","+bb+",0.5)";
+                gS2.beginPath();
+                gS2.lineWidth=wt;
+	gS2.moveTo(40+x1*x_pos,cartesian_size+40-y1*y_pos);
+                gS2.arc(40+x1*x_pos,cartesian_size+40-y1*y_pos,rad*x_pos,begin*Math.PI,cra*Math.PI);
+                gS2.closePath;
+                gS2.fill();
+                //
+                select_color(cl);
+                gS2.lineWidth=wt;
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.beginPath();
+                gS2.arc(40+x1*x_pos,cartesian_size+40-y1*y_pos,rad*x_pos,begin*Math.PI,cra*Math.PI);
+                gS2.closePath;
+                gS2.stroke();
+}
+//
+// application line
+//
+function drawLine(x1,y1,x2,y2,wt,cl) {
+var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                select_color(cl);
+                gS2.strokeStyle = "rgb("+rr+","+gg+","+bb+")";
+                gS2.lineWidth=wt;
+                gS2.beginPath();
+                gS2.moveTo(x1,y1);
+                gS2.lineTo(x2,y2);
+                gS2.closePath;
+                gS2.stroke();
+}
+//
+// coordinate system update -- from form elements
+//
+function csUpdate(idx,csvalue) {
+  if (idx == "1") {
+    title = csvalue;
+  }
+  if (idx == "2") {
+    cartesian_size = csvalue*1.0;
+  }
+  if (idx == "3") {
+    if (document.cs.x_axis_on.checked==true) {
+      x_axis_flag = 1;
+    }
+    if(document.cs.x_axis_on.checked==false) {
+      x_axis_flag = 0;
+    }
+}
+if (idx == "4") {
+  if (document.cs.x_grid_on.checked==true) {
+     x_grid_flag = 1;
+  }
+  if(document.cs.x_grid_on.checked==false) {
+     x_grid_flag = 0;
+  }
+}
+if (idx == "5") {
+  if (document.cs.x_number_on.checked==true) {
+     x_value_flag  = 1;
+  }
+  if(document.cs.x_number_on.checked==false) {
+      x_value_flag = 0;
+  }
+}
+if (idx == "6") {
+  x_label = csvalue;
+}
+if (idx == "7") {
+  x_scale = csvalue*1.0;
+}
+if (idx == "8") {
+  x_step = csvalue*1.0;
+}
+if (idx == "9") {
+  y_label = csvalue;
+}
+if (idx == "10") {
+  y_scale = csvalue*1.0;
+}
+if (idx == "11") {
+  y_step = csvalue*1.0;
+}
+ if (idx == "12") {
+    if (document.cs.y_axis_on.checked==true) {
+      y_axis_flag = 1;
+    }
+    if(document.cs.y_axis_on.checked==false) {
+      y_axis_flag = 0;
+    }
+}
+if (idx == "13") {
+  if (document.cs.y_grid_on.checked==true) {
+     y_grid_flag = 1;
+  }
+  if(document.cs.y_grid_on.checked==false) {
+     y_grid_flag = 0;
+  }
+}
+if (idx == "14") {
+  if (document.cs.y_number_on.checked==true) {
+     y_value_flag  = 1;
+  }
+  if(document.cs.y_number_on.checked==false) {
+      y_value_flag = 0;
+  }
+}
+draw();
+}
+//
+// coordinate system
+//
+function coordinate(x_scale,y_scale,x_step,y_step,x_grid_flag,y_grid_flag,x_value_flag,y_value_flag,x_axis_flag,y_axis_flag,cartesian_size) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                //
+                // scaling calculations
+                //
+                if (cartesian_size > 400) {
+                  cartesian_size = 400;
+                }
+                //
+                // x_div, y_div  = scaling values for smartart to pixels conversion
+                //
+                x_div = cartesian_size/(x_scale/x_step);
+                y_div = cartesian_size/(y_scale/y_step);
+                //
+                // for grid mark tick count -- not used here
+                //
+                x_count = x_scale/x_step;
+                y_count = y_scale/y_step;
+                //
+                // scaled position
+                //
+                x_pos = cartesian_size/x_scale;
+                y_pos = cartesian_size/y_scale;
+                //
+                // background
+                //
+                gS2.fillStyle = "rgb(250,250,250)";
+                gS2.fillRect(0,0,450,420);
+                gS2.fillStyle = "rgb(240,240,240)";
+                gS2.fillRect(40,40,cartesian_size,cartesian_size);
+                gS2.fillStyle = "rgb(255,255,255)";
+                gS2.fillRect(40,40,cartesian_size,cartesian_size);
+                //
+                // show axes ?
+                //
+                wt = 3;
+                gS2.lineWidth=wt;
+                // select_color(cl);
+                // y-axis
+                  if (y_axis_flag == 1 ) {
+                     drawLine(40,40,40,cartesian_size+40,wt,"black");
+                  }
+                // x-axis
+                  if (x_axis_flag == 1 ) {
+                    drawLine(40,cartesian_size+40,cartesian_size+40,cartesian_size+40,wt,"black");
+                  }
+                //
+                // show grid lines ?
+                //
+                gS2.lineWidth=1;
+                wt = 1;
+                // horizontal lines
+                  if (y_grid_flag ==1) {
+                    for (var i=40;i<cartesian_size+40;i=i+y_div) {
+                      drawLine(42,i,cartesian_size+40,i,wt,"gray");
+                    }
+                  }
+                //vertical lines
+                  if (x_grid_flag ==1) {
+                    for (var i=40+x_div;i<cartesian_size+50;i=i+x_div) {
+                      drawLine(i,40,i,cartesian_size+38,wt,"gray");
+                    }
+                  }
+                //
+                // show grid labels?
+                //
+                // x-axis values
+                  if (x_value_flag ==1) {
+                    for (var i=1;i<=x_count;i=i+1) {
+                      gS2.font = "12px Arial";
+                      gS2.fillStyle = "Black";
+                      var j = i*x_step;
+                      gS2.fillText(""+j,35+i*x_div,cartesian_size+55);
+                    }
+                  }
+                 // y-axis values
+                  if (y_value_flag ==1) {
+                    for (var i=1;i<y_count;i=i+1) {
+                       gS2.font = "12px Arial";
+                       gS2.fillStyle = "Black";
+                       temp = i*y_step;
+                       var width = gS2.measureText(temp).width;
+                       gS2.fillText(""+temp,35-width,cartesian_size+45-i*y_div);
+                     }
+                  }
+}
+//
+// axis labels
+//
+function axis_label(x_label,y_label,title) {
+                var canvas = document.getElementById('jk1');
+                if (canvas.getContext){
+                  var gS2 = canvas.getContext('2d');
+                }
+                gS2.font = "bold 12px Arial";
+                gS2.fillStyle = "rgb(0,0,0)";
+                temp = x_label;
+                var width = gS2.measureText(temp).width;
+                gS2.fillText(x_label,cartesian_size+40-width,cartesian_size+75);
+                gS2.fillText(y_label,40,35);
+                temp = title;
+                var width = gS2.measureText(temp).width;
+                gS2.fillText(title,(40+cartesian_size/2)-width/2,18);
+}
+//
+// core draw function
+//
+          function draw() {  
+            	var canvas = document.getElementById('jk1');  
+            	if (canvas.getContext){  
+               	    var gS2 = canvas.getContext('2d');  
+            	}  
+	//
+	// diagnostics -- for debugging
+	//
+	// gS2.fillStyle = "rgb(0,0,0)";
+	// gS2.font = "12px Arial";
+	// gS2.fillText("Item count: "+count,100,35);
+	// gS2.fillText("color = "+cl_temp,60,375);
+	// gS2.fillText("object = "+item,60,385);
+	// gS2.fillText(instruction,60,400);
+	//
+	// coordinate system layout
+	//
+	coordinate(x_scale,y_scale,x_step,y_step,x_grid_flag,y_grid_flag,x_value_flag,y_value_flag,x_axis_flag,y_axis_flag,cartesian_size);
+	axis_label(x_label,y_label,title);	
+	//
+	// draw things here
+	//
+	for (k=1;k<count+1;k++ ) {
+	  if (objecta[k] == "Line") {
+	    csLine(zero[k],one[k],two[k],three[k],wta[k],cla[k]);
+	     }
+	  if (objecta[k] == "DropLine") {
+	    csDropLine(zero[k],one[k],1,cla[k],two[k],three[k]);
+	    csPoint(zero[k],one[k],wta[k],cla[k]);
+	  }
+	  if(objecta[k] == "Label") {
+	    csLabel(zero[k],one[k],two[k],wta[k],cla[k]);
+	  }
+	    if(objecta[k] == "Circle") {
+	    csCircle(zero[k]*1.0,one[k]*1.0,two[k]*1.0,wta[k],cla[k],cla[k]);
+	  }
+	  if(objecta[k] == "Slice") {
+	    csSlice(zero[k]*1.0,one[k]*1.0,two[k]*1.0,three[k]*1.0,four[k]*1.0,wta[k]*1.0,cla[k],cla[k]);
+	  }
+	  if(objecta[k] == "Rectangle") {
+	    csRectangle(zero[k]*1.0,one[k]*1.0,two[k]*1.0,three[k]*1.0,wta[k],cla[k],cla[k]);
+	  }
+	  if(objecta[k] == "Triangle") {
+	    csTriangle(zero[k]*1.0,one[k]*1.0,two[k]*1.0,three[k]*1.0,four[k]*1.0,five[k]*1.0,wta[k]*1.0,cla[k],cla[k]);
+	   }
+	  if(objecta[k] == "Arrow") {
+	     csArrow(zero[k]*1.0,one[k]*1.0,two[k]*1.0,three[k]*1.0,wta[k]*1.0,cla[k],four[k]*1.0,five[k]*1.0);
+	  }
+	  if(objecta[k] == "Curve") {
+	    csPlotFunction(zero[k]*1.0,one[k]*1.0,two[k]*1.0,three[k]*1.0,four[k]*1.0,five[k]*1.0,six[k]*1.0,wta[k],cla[k]);
+	  }
+	}
+}
+</script>  
+
+      <style type="text/css">  
+            canvas { border: 0px solid black; }  
+           .xx {display: block; width: 40px; height 30px; margin: 2px; background-color: #efefef;}
+            .xx:hover { background-color: #cdcdcd; border: thin solid #cc0000;}
+            .yy {display: block; margin: 0px; }
+           .yy:hover {border: thin solid black;}
+      </style>  
+
+</head>  
+<body onload="draw();">
+  <form name="cs">
+
+<header style = "width: 500px; height: 40px;">
+   <img src = "econgk2.jpg"/>
+</header>
+
+<aside style = "float: left; display: block; width: 45px; height: 405px; margin: 2px; background-color:#efefef; border: solid thin #909090; border-bottom: solid thick #dd0000;">
+<div class = "xx" id="line"  onclick="clz(0);"><img src="f1.gif"/></div>
+<div class = "xx" id="rectangle"  onclick="clz(1);"><img src="f3a.gif"/></div>
+<div class = "xx" id="point"  onclick="clz(2);"><img src="f5.gif"/></div>
+<div class = "xx" id="triangle1"  onclick="clz(3);"><img src="f7.gif"/></div>
+<div class = "xx" id="udown"  onclick="clz(4);"><img src="f10.gif"/></div>
+<div class = "xx" id="arrow1"  onclick="clz(5);"><img src="f12.gif"/></div>
+<div class = "xx" id="arrow1"  onclick="clz(7);"><img src="f15.gif"/></div>
+<div class = "xx" id="arrow1"  onclick="clz(8);"><img src="f16.gif"/></div>
+<div class = "xx" id="label"  onclick="clz(6);"><img src="f14.gif"/></div>
+</aside>
+
+<section style = "float:left; width: 460px; margin: 2px;">
+         <canvas id="jk1" width="450" height="410" bgcolor="#efefef">
+           No support for the HTML5 object!
+        </canvas>  
+</section>
+
+<footer style = " width: 490px; clear: both; padding: 3px; background-color: #cad8ff">
+<span style = "display: block; padding: 5px; font-weight: bold; font-variant: small-caps; text-align: center; border-bottom: thin solid black;">right-click on the image to save.</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+Title: <input type="text" name = "title" value = "Graph" style = "width: 250px; height: 20px;" onchange="csUpdate(1,this.form.title.value);"onfocus = "if(this.value !='') this.value='';" />
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+Size (max: 360): <input type="text" name = "size" value = "300" style = "width: 40px; height: 20px;" onchange="csUpdate(2,this.form.size.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span><br/>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+x-Axis label: <input type="text" name = "xlbl" value = "none" style = "width: 150px; height: 18px; " onchange="csUpdate(6,this.form.xlbl.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+x-max: <input type="text" name = "xmax" value = "100" style = "width: 40px; height: 18px;" onchange="csUpdate(7,this.form.xmax.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+x-scale: <input type="text" name = "xscale" value = "10" style = "width: 40px; height: 18px;" onchange="csUpdate(8,this.form.xscale.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span><br/>
+<span style = "font-weight: bold; font-family: arial; font-size: small; ">
+Axes on? <input type="checkbox" name = "x_axis_on" checked = "checked" style = "background-color: #ffffff;" onchange="csUpdate(3,this.form.x_axis_on.value);"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+Grid on? <input type="checkbox" name = "x_grid_on" checked = "checked"  onchange="csUpdate(4,this.form.x_grid_on.value);"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+Axis labels on? <input type="checkbox" name = "x_number_on" checked = "checked"  onchange="csUpdate(5,this.form.x_number_on.value);"/>
+</span><br/>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+y-Axis label: <input type="text" name = "ylbl" value = "none" style = "width: 150px; height: 18px;" onchange="csUpdate(9,this.form.ylbl.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+y-max: <input type="text" name = "ymax" value = "100" style = "width: 40px; height: 18px;" onchange="csUpdate(10,this.form.ymax.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+y-scale: <input type="text" name = "yscale" value = "10" style = "width: 40px; height: 18px;" onchange="csUpdate(11,this.form.yscale.value);" onfocus = "if(this.value !='') this.value='';"/>
+</span><br/>
+<span style = "font-weight: bold; font-family: arial; font-size: small; ">
+Axes on? <input type="checkbox" name = "y_axis_on" checked = "checked" style = "background-color: #ffffff;" onchange="csUpdate(12,this.form.y_axis_on.value);"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+Grid on? <input type="checkbox" name = "y_grid_on" checked = "checked"  onchange="csUpdate(13,this.form.y_grid_on.value);"/>
+</span>
+<span style = "font-weight: bold; font-family: arial; font-size: small;">
+Axis labels on? <input type="checkbox" name = "y_number_on" checked = "checked"  onchange="csUpdate(14,this.form.y_number_on.value);"/>
+</span><br/>
+
+<span style = "display: block; padding: 5px; font-weight: bold; font-family: arial; font-size: small; text-align: center; border-top: thin solid black;">
+<input type = "button" value="Generate code" onclick="window1();"/>
+<input type = "button" value="Undo" onclick="undo();"/>
+<input type = "button" value="Reset" onclick="reset();"/>
+</span>
+</footer>
+</form>
+</body>
+</html>

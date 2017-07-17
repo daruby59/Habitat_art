@@ -1,0 +1,144 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"> 
+
+    <title>Histogram</title>
+
+    <script src="test_files/Habitat_art_10_29_2015.js"></script>
+
+    <script type="text/javascript"> 
+
+    //
+
+    // date: 10-29-2015
+
+    //
+
+//
+
+function draw() {
+
+var canvas = document.getElementById('Smartart'); 
+
+                if (canvas.getContext){ 
+
+                  var gS2 = canvas.getContext('2d'); 
+
+                } 
+
+//
+
+// (1) coordinate(x_scale,y_scale,x_step,y_step,grid on,axis values on, axes on, system size);
+
+//
+
+	x_scale = 45.0;
+
+	y_scale = 70.0;
+
+	x_step = 5.0;
+
+	y_step = 5.0;
+
+	grid_flag = 0.0;
+
+	value_flag = 1.0;
+	axis_flag = 1.0;
+
+	cartesian_size = 300.0;
+
+    	coordinate(x_scale,y_scale,x_step,y_step,grid_flag,value_flag,axis_flag,cartesian_size);
+
+//
+
+// (2) axis_label(x axis label, y axis label, graph title)
+
+//
+
+    	x_label = "Gas Prices";
+
+    	y_label = "Percent";
+
+	title = "Histogram";
+
+    	axis_label(x_label,y_label,title);
+
+//
+
+// (3) csLine(x1,y1,x2,y2,color,line weight);  
+
+// (4) csPoint(x1,y1,weight,color);
+
+// (5)  csLabel(x1,y1,text,color);
+
+// (6) csDropLine(x1,y1,weight,fill color,x_drop on, y_drop on);
+
+// (7) csRectangle(x1,y1,width,height,weight,border color, fill color)
+
+// (8) csTriangle(x1,y1,x2,y2,x3,y3,color,fill color)
+
+// (9) csPlotFunction(constant,linear,quadratic,cubed,inverse,start,end,color,line weight)
+
+// (10) csArrow(x1,y1,x2,y2,color,weight,tail on,head on)
+// (11) csCircle(x1,y1,radius,weight,color, fill color)
+// (12) csSlice(x1,y1,radius,start,arc,weight,color,fill_color)
+//
+csRectangle(2.5,40,4.7,40,2,"maroon","red");
+csRectangle(7.5,32,5,32,2,"teal","green");
+csRectangle(12.5,25,5,25,2,"red","orange");
+csRectangle(17.5,20,5,20,2,"navy","blue");
+csRectangle(22.5,55,5,55,2,"pine","teal");
+csRectangle(27.5,12,5,12,2,"blue","thunder");
+csRectangle(32.5,16,5,16,2,"thunder","a2z");
+csRectangle(37.5,30,5,30,2,"purple","aqua");
+csLine(0,0,45,0,2,"black");
+
+//
+}
+
+</script> 
+
+ 
+
+<style type="text/css"> 
+
+    canvas { border: 0px solid black; } 
+
+</style>
+
+</head> 
+
+ 
+
+<body onload="draw();">
+
+<table border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+
+    <td>
+
+         <canvas id="Smartart" width="400" height="400" bgcolor="white">
+
+           No support for the HTML5 object!
+
+        </canvas> 
+ <img id="canvasImg" alt="Right click to save me!">
+  
+
+    </td>
+
+</tr>
+
+</tbody></table>
+<script>
+ // save canvas image as data url (png format by default)
+      var dataURL = canvas.toDataURL();
+
+      // set canvasImg image src to dataURL
+      // so it can be saved as an image
+      document.getElementById('canvasImg').src = dataURL;
+</script>
+
+
+
+</body></html>

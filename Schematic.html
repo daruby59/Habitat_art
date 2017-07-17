@@ -1,0 +1,73 @@
+<html>
+  <head> 
+    <title>SmartArt</title>
+    <script src="Hab_art.js"></script>
+    <script type="text/javascript"> 
+    //
+    // date: 10-26-2015
+    //
+//
+function draw() {
+var canvas = document.getElementById('Smartart'); 
+                if (canvas.getContext){ 
+                  var gS2 = canvas.getContext('2d'); 
+                } 
+//
+// (1) coordinate(x_scale,y_scale,x_step,y_step,grid on,axis values on, axes on, system size);
+//
+	x_scale = 100.0;
+	y_scale = 100.0;
+	x_step = 10.0;
+	y_step = 10.0;
+	grid_flag = 0.0;
+	value_flag = 0.0;
+	axis_flag = 0.0;
+	cartesian_size = 240.0;
+    	coordinate(x_scale,y_scale,x_step,y_step,grid_flag,value_flag,axis_flag,cartesian_size);
+//
+// (2) axis_label(x axis label, y axis label, graph title)
+//
+    	x_label = "";
+    	y_label = "";
+	title = "Flow Diagram";
+    	axis_label(x_label,y_label,title);
+//
+// (3) csLine(x1,y1,x2,y2,color,line weight);  
+// (4) csPoint(x1,y1,weight,color);
+// (5)  csLabel(x1,y1,text,color);
+// (6) csDropLine(x1,y1,weight,fill color,x_drop on, y_drop on);
+// (7) csRectangle(x1,y1,width,height,weight,border color, fill color)
+// (8) csTriangle(x1,y1,x2,y2,x3,y3,color,fill color)
+// (9) csPlotFunction(constant,linear,quadratic,cubed,inverse,start,end,color,line weight)
+// (10) csArrow(x1,y1,x2,y2,color,weight,tail on,head on)
+// (11) csCircle(x1,y1,radius,weight,color, fill color)
+csRectangle(5,70,100,40,1,"silver","silver");
+csRectangle(10,60,20,20,1,"navy","white");
+csArrow(30,50,50,50,"teal",2,0,1);
+csTriangle(50,60,65,50,50,40,1,"maroon","red");
+csArrow(65,50,80,50,2,"teal",0,1);
+csTriangle(80,50,90,60,90,40,1,"a2z","a2z")
+csTriangle(90,60,100,50,90,40,1,"a2z","a2z")
+csCircle(50,30,20,1,"thunder","black");
+
+//
+}
+</script> 
+ 
+<style type="text/css"> 
+    canvas { border: 0px solid black; } 
+</style>
+</head> 
+ 
+<body onload="draw();">
+<table border = "0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+         <canvas id="Smartart" width="400" height="400" bgcolor="white">
+           No support for the HTML5 object!
+        </canvas> 
+    </td>
+</tr>
+</table>
+</body>
+</html>
